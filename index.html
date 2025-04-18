@@ -1,0 +1,268 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+<html>
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+  <meta http-equiv="Content-Style-Type" content="text/css">
+  <title></title>
+  <meta name="Generator" content="Cocoa HTML Writer">
+  <meta name="CocoaVersion" content="2575.3">
+  <style type="text/css">
+    p.p1 {margin: 0.0px 0.0px 10.0px 0.0px; font: 12.0px Helvetica; color: #000000}
+    p.p2 {margin: 0.0px 0.0px 10.0px 0.0px; font: 12.0px Helvetica; color: #000000; min-height: 14.0px}
+    span.s1 {font: 12.0px 'Apple Color Emoji'}
+  </style>
+</head>
+<body>
+<p class="p1">&lt;!DOCTYPE html&gt;</p>
+<p class="p1">&lt;html lang="en"&gt;</p>
+<p class="p1">&lt;head&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta charset="UTF-8"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;title&gt;Slot Game with Login&lt;/title&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;style&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>body {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: linear-gradient(135deg, #1f1c2c, #928dab);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: #fff;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>h1, h2 {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-shadow: 2px 2px 4px #000;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#auth-container, #game-container {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 20px auto;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255, 255, 255, 0.1);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 20px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 90%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>max-width: 500px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>input[type="text"], input[type="password"], input[type="number"] {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 80%;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1em;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 12px 25px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #ff6f61;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>cursor: pointer;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 10px 5px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>transition: 0.3s ease;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>button:hover {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: #e65550;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.hidden {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.coin-counter {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 1.4em;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-weight: bold;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 15px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.slot-row {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>gap: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 15px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.slot {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>width: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>height: 60px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: white;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>color: black;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>font-size: 2em;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>display: flex;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>align-items: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>justify-content: center;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 10px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>box-shadow: 0 0 10px rgba(0,0,0,0.3);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>animation: none;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>.slot.spinning {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>animation: spin 0.3s linear infinite;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>@keyframes spin {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>0% { transform: rotateX(0deg); }</p>
+<p class="p1"><span class="Apple-converted-space">      </span>100% { transform: rotateX(360deg); }</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#leaderboard {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin-top: 30px;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#leaderboard ul {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>list-style: none;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 0;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>text-align: left;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">    </span>#leaderboard li {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>background: rgba(255, 255, 255, 0.15);</p>
+<p class="p1"><span class="Apple-converted-space">      </span>padding: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>border-radius: 8px;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>margin: 4px 0;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/style&gt;</p>
+<p class="p1">&lt;/head&gt;</p>
+<p class="p1">&lt;body&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;audio id="win-sound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg"&gt;&lt;/audio&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;audio id="spin-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"&gt;&lt;/audio&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="auth-container"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;Login&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="login-username" placeholder="Username"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="password" id="login-password" placeholder="Password"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="login()"&gt;Login&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h2&gt;Sign Up&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="text" id="signup-username" placeholder="New Username"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="password" id="signup-password" placeholder="New Password"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="signup()"&gt;Sign Up&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;p id="auth-message" class="error-message"&gt;&lt;/p&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;div id="game-container" class="hidden"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;h1&gt;<span class="s1">🌰</span> Slot Game <span class="s1">🌰</span>&lt;/h1&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="coin-counter"&gt;Coins: &lt;span id="coins"&gt;50&lt;/span&gt;&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;input type="number" id="bet-amount" min="1" max="999" placeholder="Enter bet amount" /&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div class="slot-row"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="slot" id="slot1"&gt;?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="slot" id="slot2"&gt;?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;div class="slot" id="slot3"&gt;?&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="spin()"&gt;<span class="s1">🎲</span> Spin&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;button onclick="logout()"&gt;Logout&lt;/button&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;div id="leaderboard"&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;h2&gt;Leaderboard&lt;/h2&gt;</p>
+<p class="p1"><span class="Apple-converted-space">      </span>&lt;ul id="leaderboard-list"&gt;&lt;/ul&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>&lt;/div&gt;</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/div&gt;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;script&gt;</p>
+<p class="p1"><span class="Apple-converted-space">    </span>window.onload = function () {</p>
+<p class="p1"><span class="Apple-converted-space">      </span>(function () {</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const SYMBOLS = ["<span class="s1">🍒</span>", "<span class="s1">🍋</span>", "<span class="s1">🔔</span>", "<span class="s1">💎</span>", "<span class="s1">⭐</span>"];</p>
+<p class="p1"><span class="Apple-converted-space">        </span>const VALUES = { "<span class="s1">🍒</span>": 1, "<span class="s1">🍋</span>": 2, "<span class="s1">🔔</span>": 5, "<span class="s1">💎</span>": 10, "<span class="s1">⭐</span>": 20 };</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>if (!window.users) {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>window.users = JSON.parse(localStorage.getItem('users')) || {};</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>let currentUser = null;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateGameDisplay() {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('coins').textContent = users[currentUser].coins;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>updateLeaderboard();</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>function updateLeaderboard() {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const list = document.getElementById('leaderboard-list');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>list.innerHTML = '';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const sortedUsers = Object.entries(users).sort(([, a], [, b]) =&gt; b.coins - a.coins);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>for (let [username, data] of sortedUsers.slice(0, 10)) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const li = document.createElement('li');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>li.textContent = `${username}: ${data.coins} coins`;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>list.appendChild(li);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.login = function () {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const username = document.getElementById('login-username').value;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const password = document.getElementById('login-password').value;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (users[username] &amp;&amp; users[username].password === password) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>currentUser = username;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('auth-container').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('game-container').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">            </span>updateGameDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>} else {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('auth-message').textContent = 'Invalid credentials.';</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.signup = function () {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const username = document.getElementById('signup-username').value;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const password = document.getElementById('signup-password').value;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (!username || !password) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('auth-message').textContent = 'Please fill out all fields.';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (users[username]) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('auth-message').textContent = 'Username already exists.';</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p1"><span class="Apple-converted-space">          </span>users[username] = { password: password, coins: 50 };</p>
+<p class="p1"><span class="Apple-converted-space">          </span>localStorage.setItem('users', JSON.stringify(users));</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('auth-message').textContent = 'Sign-up successful. You can now log in.';</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.logout = function () {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>currentUser = null;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('game-container').classList.add('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('auth-container').classList.remove('hidden');</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">        </span>window.spin = async function () {</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const user = users[currentUser];</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const bet = parseInt(document.getElementById('bet-amount').value) || 10;</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (bet &lt; 1 || user.coins &lt; bet) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert("Invalid or insufficient bet.");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>user.coins -= bet;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>document.getElementById('spin-sound').play();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>updateGameDisplay();</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const slots = ["slot1", "slot2", "slot3"];</p>
+<p class="p1"><span class="Apple-converted-space">          </span>const results = [];</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>for (let i = 0; i &lt; slots.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const el = document.getElementById(slots[i]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.classList.add("spinning");</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>await new Promise(resolve =&gt; setTimeout(resolve, 1000));</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>for (let i = 0; i &lt; slots.length; i++) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const symbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];</p>
+<p class="p1"><span class="Apple-converted-space">            </span>const el = document.getElementById(slots[i]);</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.classList.remove("spinning");</p>
+<p class="p1"><span class="Apple-converted-space">            </span>el.textContent = symbol;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>results.push(symbol);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>const counts = results.reduce((acc, sym) =&gt; {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>acc[sym] = (acc[sym] || 0) + 1;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>return acc;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}, {});</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>let winAmount = 0;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>for (let symbol in counts) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (counts[symbol] === 2) winAmount += VALUES[symbol] * bet;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>if (counts[symbol] === 3) winAmount += VALUES[symbol] * bet * 3;</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>if (winAmount &gt; 0) {</p>
+<p class="p1"><span class="Apple-converted-space">            </span>user.coins += winAmount;</p>
+<p class="p1"><span class="Apple-converted-space">            </span>document.getElementById('win-sound').play();</p>
+<p class="p1"><span class="Apple-converted-space">            </span>alert(`You won ${winAmount} coins!`);</p>
+<p class="p1"><span class="Apple-converted-space">          </span>}</p>
+<p class="p2"><br></p>
+<p class="p1"><span class="Apple-converted-space">          </span>updateGameDisplay();</p>
+<p class="p1"><span class="Apple-converted-space">          </span>localStorage.setItem('users', JSON.stringify(users));</p>
+<p class="p1"><span class="Apple-converted-space">        </span>}</p>
+<p class="p1"><span class="Apple-converted-space">      </span>})();</p>
+<p class="p1"><span class="Apple-converted-space">    </span>}</p>
+<p class="p1"><span class="Apple-converted-space">  </span>&lt;/script&gt;</p>
+<p class="p1">&lt;/body&gt;</p>
+<p class="p1">&lt;/html&gt;</p>
+</body>
+</html>
