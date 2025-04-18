@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Slot Game with Login</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      text-align: center;
+      background: linear-gradient(135deg, #1f1c2c, #928dab);
+      color: #fff;
+      margin: 0;
+      padding: 0;
+    }
+    h1, h2 {
+      text-shadow: 2px 2px 4px #000;
+    }
+    #auth-container, #game-container {
+      margin: 20px auto;
+      padding: 30px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+      width: 90%;
+      max-width: 500px;
+    }
+    input[type="text"], input[type="password"], input[type="number"] {
+      padding: 12px;
+      margin: 10px;
+      border: none;
+      border-radius: 10px;
+      width: 80%;
+      font-size: 1em;
+    }
+    button {
+      padding: 12px 25px;
+      background: #ff6f61;
+      color: white;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      font-weight: bold;
+      margin: 10px 5px;
+      transition: 0.3s ease;
+    }
+    button:hover {
+      background: #e65550;
+    }
+    .hidden {
+      display: none;
+    }
+    .coin-counter {
+      font-size: 1.4em;
+      font-weight: bold;
+      margin: 15px 0;
+    }
+    .slot-row {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      margin: 15px 0;
+    }
+    .slot {
+      width: 60px;
+      height: 60px;
+      background: white;
+      color: black;
+      font-size: 2em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.3);
+      animation: none;
+    }
+    .slot.spinning {
+      animation: spin 0.3s linear infinite;
+    }
+    @keyframes spin {
+      0% { transform: rotateX(0deg); }
+      100% { transform: rotateX(360deg); }
+    }
+    #leaderboard {
+      margin-top: 30px;
+    }
+    #leaderboard ul {
+      list-style: none;
+      padding: 0;
+      text-align: left;
+    }
+    #leaderboard li {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 8px;
+      border-radius: 8px;
+      margin: 4px 0;
+    }
+  </style>
+</head>
+<body>
+  <audio id="win-sound" src="https://actions.google.com/sounds/v1/cartoon/concussive_hit_guitar_boing.ogg"></audio>
+  <audio id="spin-sound" src="https://actions.google.com/sounds/v1/cartoon/wood_plank_flicks.ogg"></audio>
+
+  <div id="auth-container">
+    <h1>Login</h1>
+    <input type="text" id="login-username" placeholder="Username">
+    <input type="password" id="login-password" placeholder="Password">
+    <button onclick="login()">Login</button>
+    <h2>Sign Up</h2>
+    <input type="text" id="signup-username" placeholder="New Username">
+    <input type="password" id="signup-password" placeholder="New Password">
+    <button onclick="signup()">Sign Up</button>
+    <p id="auth-message" class="error-message"></p>
+  </div>
+
+  <div id="game-container" class="hidden">
+    <h1>🌰 Slot Game 🌰</h1>
+    <div class="coin-counter">Coins: <span id="coins">50</span></div>
+    <input type="number" id="bet-amount" min="1" max="999" placeholder="Enter bet amount" />
+    <div class="slot-row">
+      <div class="slot" id="slot1">?</div>
+      <div class="slot" id="slot2">?</div>
+      <div class="slot" id="slot3">?</div>
+    </div>
+    <button onclick="spin()">🎲 Spin</button>
+    <button onclick="logout()">Logout</button>
+    <div id="leaderboard">
+      <h2>Leaderboard</h2>
+      <ul id="leaderboard-list"></ul>
+    </div>
+  </div>
+
+  <script>
+    window.onload = function () {
+      (function () {
+        const SYMBOLS = ["🍒", "🍋", "🔔", "💎", "⭐"];
+        const VALUES = { "🍒": 1, "🍋": 2, "🔔": 5, "💎": 10, "⭐": 20 };
+
+        if (!window.users) {
+          window.users = JSON.parse(localStorage.getItem('users')) || {};
+        }
+
+        let currentUser = null;
+
+        function updateGameDisplay() {
+          document.getElementById('coins').textContent = users[currentUser].coins;
+          updateLeaderboard();
+        }
+
+        function updateLeaderboard() {
+          const list = document.getElementById('leaderboard-list');
+          list.innerHTML = '';
+          const sortedUsers = Object.entries(users).sort(([, a], [, b]) => b.coins - a.coins);
+          for (let [username, data] of sortedUsers.slice(0, 10)) {
+            const li = document.createElement('li');
+            li.textContent = `${username}: ${data.coins} coins`;
+            list.appendChild(li);
+          }
+        }
+
+        window.login = function () {
+          const username = document.getElementById('login-username').value;
+          const password = document.getElementById('login-password').value;
+          if (users[username] && users[username].password === password) {
+            currentUser = username;
+            document.getElementById('auth-container').classList.add('hidden');
+            document.getElementById('game-container').classList.remove('hidden');
+            updateGameDisplay();
+          } else {
+            document.getElementById('auth-message').textContent = 'Invalid credentials.';
+          }
+        }
+
+        window.signup = function () {
+          const username = document.getElementById('signup-username').value;
+          const password = document.getElementById('signup-password').value;
+          if (!username || !password) {
+            document.getElementById('auth-message').textContent = 'Please fill out all fields.';
+            return;
+          }
+          if (users[username]) {
+            document.getElementById('auth-message').textContent = 'Username already exists.';
+            return;
+          }
+          users[username] = { password: password, coins: 50 };
+          localStorage.setItem('users', JSON.stringify(users));
+          document.getElementById('auth-message').textContent = 'Sign-up successful. You can now log in.';
+        }
+
+        window.logout = function () {
+          currentUser = null;
+          document.getElementById('game-container').classList.add('hidden');
+          document.getElementById('auth-container').classList.remove('hidden');
+        }
+
+        window.spin = async function () {
+          const user = users[currentUser];
+          const bet = parseInt(document.getElementById('bet-amount').value) || 10;
+
+          if (bet < 1 || user.coins < bet) {
+            alert("Invalid or insufficient bet.");
+            return;
+          }
+
+          user.coins -= bet;
+          document.getElementById('spin-sound').play();
+          updateGameDisplay();
+
+          const slots = ["slot1", "slot2", "slot3"];
+          const results = [];
+
+          for (let i = 0; i < slots.length; i++) {
+            const el = document.getElementById(slots[i]);
+            el.classList.add("spinning");
+          }
+
+          await new Promise(resolve => setTimeout(resolve, 1000));
+
+          for (let i = 0; i < slots.length; i++) {
+            const symbol = SYMBOLS[Math.floor(Math.random() * SYMBOLS.length)];
+            const el = document.getElementById(slots[i]);
+            el.classList.remove("spinning");
+            el.textContent = symbol;
+            results.push(symbol);
+          }
+
+          const counts = results.reduce((acc, sym) => {
+            acc[sym] = (acc[sym] || 0) + 1;
+            return acc;
+          }, {});
+
+          let winAmount = 0;
+          for (let symbol in counts) {
+            if (counts[symbol] === 2) winAmount += VALUES[symbol] * bet;
+            if (counts[symbol] === 3) winAmount += VALUES[symbol] * bet * 3;
+          }
+
+          if (winAmount > 0) {
+            user.coins += winAmount;
+            document.getElementById('win-sound').play();
+            alert(`You won ${winAmount} coins!`);
+          }
+
+          updateGameDisplay();
+          localStorage.setItem('users', JSON.stringify(users));
+        }
+      })();
+    }
+  </script>
+</body>
+</html>
